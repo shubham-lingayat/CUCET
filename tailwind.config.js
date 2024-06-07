@@ -47,6 +47,7 @@ module.exports = {
       textlightgrey: "#A3B4CD",
       inputbox: "#69727a",
       buttonyellow: "#E9C681",
+      bordercourse: "rgba(255, 255, 255, .3)",
     },
   },
   plugins: [],

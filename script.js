@@ -19,3 +19,17 @@ function showSlides() {
   dots[slideIndex - 1].className += " active";
   setTimeout(showSlides, 2000);
 }
+
+// EMAIL VALIDATION ----------------------------
+const emailInput = document.getElementById("email");
+const resultElement = document.getElementById("result");
+
+emailInput.addEventListener("input", function () {
+  const email = emailInput.value;
+
+  if (validator.isEmail(email)) {
+    resultElement.innerText = "Email address is valid";
+  } else {
+    resultElement.innerText = "Email address is invalid";
+  }
+});

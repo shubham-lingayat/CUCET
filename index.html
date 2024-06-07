@@ -335,11 +335,87 @@
                 </h6>
               </div>
               <!-- Form Body -->
-              <div class="h-[355px] w-[442.33px] mb-[8px]">
-                <!-- buttons -->
-                <!-- <button class="bg-startyourtest rounded-lg">REGISTER</button>
-                <button class="bg-loginbutton rounded-lg">LOGIN</button> -->
-              </div>
+              <form
+                action="/submit"
+                method="POST"
+                class="h-[355px] relative w-[442.33px] content-center flex gap-3 flex-col items-center mb-[8px]"
+              >
+                <input
+                  name="fullname"
+                  type="text"
+                  placeholder="ENTER STUDENT NAME"
+                  class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
+                />
+                <input
+                  type="text"
+                  name="email"
+                  type="email"
+                  id="email"
+                  placeholder="ENTER STUDENT EMAIL ID"
+                  class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
+                />
+                <p
+                  id="result"
+                  class="text-[red] top-[90px] text-[12px] right-[90px] absolute"
+                ></p>
+                <p
+                  id="result2"
+                  class="text-[green] top-[90px] text-[12px] right-[90px] absolute"
+                ></p>
+
+                <script src="https://cdn.jsdelivr.net/npm/validator@13.6.0/validator.min.js"></script>
+                <script>
+                  const emailInput = document.getElementById("email");
+                  const resultElement = document.getElementById("result");
+                  const resultEl = document.getElementById("result2");
+
+                  emailInput.addEventListener("input", function () {
+                    const email = emailInput.value;
+
+                    if (validator.isEmail(email)) {
+                      resultEl.innerText = "Email address is valid";
+                      resultElement.innerText = "";
+                    } else {
+                      resultElement.innerText = "Email address is invalid";
+                      resultEl.innerText = "";
+                    }
+                  });
+                </script>
+                <div class="flex gap-4 w-full ml-[160px]">
+                  <button
+                    class="bg-fontcolorsky w-[25%] h-10 py-[10px] px-[15px] text-[10px] semibold rounded-md text-center text-white relative hover:bg-yellowline"
+                  >
+                    SEND OTP
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="ENTER OTP HERE"
+                    class="w-[35%] h-10 pl-[15px] text-[12px] worksansregular rounded-md text-black border-[1px] border-textgrey"
+                  />
+                </div>
+
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="ENTER STUDENT PHONE NUMBER"
+                  class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
+                />
+                <div class="w-full ml-[160px] flex gap-4">
+                  <button
+                    value="submit"
+                    type="submit"
+                    class="bg-fontcolorsky w-[30%] h-[49px] py-[14px] px-[35px] text-[14px] semibold rounded-lg text-center text-white relative hover:bg-yellowline"
+                  >
+                    REGISTER
+                  </button>
+
+                  <button
+                    class="bg-fontcolorsky w-[30%] h-[49px] py-[14px] px-[35px] text-[14px] semibold rounded-lg text-center text-white relative hover:bg-yellowline"
+                  >
+                    LOG IN
+                  </button>
+                </div>
+              </form>
               <!-- Form footer -->
               <div>
                 <p class="text-white text-[12px] text-center leading-[12px]">
@@ -1070,7 +1146,7 @@
         <div
           class="w-full mt-12 bg-[url('./images/find-course-bg.png')] bg-cover bg-no-repeat p-[50px] rounded-[20px] h-[532px] flex relative"
         >
-          <span class="w-[41.66667]">
+          <span class="w-[41.66667%]">
             <div>
               <h2
                 class="text-white mb-[15px] text-[24px] leading-[36px] semibold"
@@ -1088,43 +1164,81 @@
               <input
                 type="text"
                 placeholder="SELECT DISCIPLINE"
-                class="w-[95%] h-[48px] pr-[36px] pl-[15px] bg-[url('./images/caret.png')] bg-no-repeat bg-[length:10px] bg-right bg-y-[50%] text-[15px] worksansregular rounded-md text-textgrey border-[1px] border-textgrey"
+                class="w-[64%] h-[48px] pr-[36px] pl-[15px] bg-[url('./images/caret.png')] bg-no-repeat bg-[length:10px] bg-right bg-y-[50%] text-[15px] worksansregular rounded-md text-textgrey border-[1px] border-textgrey"
               />
               <input
                 type="text"
                 placeholder="SELECT PROGRAM"
-                class="w-[95%] h-[48px] pr-[36px] pl-[15px] bg-[url('./images/caret.png')] bg-no-repeat bg-[length:10px] bg-right bg-y-[50%] text-[15px] worksansregular rounded-md text-textgrey border-[1px] border-textgrey"
+                class="w-[64%] h-[48px] pr-[36px] pl-[15px] bg-[url('./images/caret.png')] bg-no-repeat bg-[length:10px] bg-right bg-y-[50%] text-[15px] worksansregular rounded-md text-textgrey border-[1px] border-textgrey"
               />
             </div>
             <button
-              class="bg-fontcolorsky hover:border-b-[2px] hover:border-yellowline leading-[20px] mt-[22px] w-[39%] h-[49px] py-[13px] px-[3rem] text-[14px] semibold rounded-md text-center text-white relative hover:bg-buttonyellow hover:text-black"
+              class="bg-fontcolorsky w-[221.63px] hover:border-b-[2px] hover:border-yellowline leading-[20px] mt-[22px] h-[49px] py-[13px] px-[3rem] text-[14px] semibold rounded-md text-center text-white relative hover:bg-buttonyellow hover:text-black"
             >
               VIEW PROGRAM
             </button>
           </span>
-          <span class="w-[58.33333%]">
-            <span>
-              <p>
+          <span class="w-[58.33333%] flex">
+            <span
+              class="text-white border-r-[1px] border-bordercourse px-[30px] w-[51%]"
+            >
+              <p
+                class="leading-[20px] text-[13px] mt-0 mb-[1rem] worksansregular"
+              >
                 Following AIT MBA Specialized Programs are <br />
                 having different Scholarship slabs. <br />
                 <br />
                 Please visit the program webpage by clicking <br />
                 the links below for more information.
               </p>
-              <ul>
-                <li>MBA Banking & Financial Engineering with SBI & Tally</li>
-                <li>MBA Strategic HR with AON Consulting</li>
-                <li>MBA Fintech with NSE Academy</li>
-                <li>MBA - Strategic Human Resources (ITP)</li>
-                <li>MBA (Applied Finance)</li>
+              <ul class="text-[17px] leading-[20px] mb-[3rem] worksansregular">
+                <li class="mb-[15px] relative text-left">
+                  <img
+                    src="./images/ext-blue-link.png"
+                    alt=""
+                    class="bg-no-repeat absolute left-[-34px] w-[21px] h-[21px]"
+                  />
+                  MBA Banking & Financial Engineering <br />
+                  with SBI & Tally
+                </li>
+                <li class="mb-[15px] relative text-left">
+                  <img
+                    src="./images/ext-blue-link.png"
+                    alt=""
+                    class="bg-no-repeat absolute left-[-34px] w-[21px] h-[21px]"
+                  />MBA Strategic HR with AON Consulting
+                </li>
+                <li class="mb-[15px] relative text-left">
+                  <img
+                    src="./images/ext-blue-link.png"
+                    alt=""
+                    class="bg-no-repeat absolute left-[-34px] w-[21px] h-[21px]"
+                  />MBA Fintech with NSE Academy
+                </li>
+                <li class="mb-[15px] relative text-left">
+                  <img
+                    src="./images/ext-blue-link.png"
+                    alt=""
+                    class="bg-no-repeat absolute left-[-34px] w-[21px] h-[21px]"
+                  />MBA - Strategic Human Resources (ITP)
+                </li>
+                <li class="mb-[15px] relative text-left">
+                  <img
+                    src="./images/ext-blue-link.png"
+                    alt=""
+                    class="bg-no-repeat absolute left-[-34px] w-[21px] h-[21px]"
+                  />MBA (Applied Finance)
+                </li>
               </ul>
-              <p>
-                <span>NOTE:</span> <br />
+              <p class="text-[14px] workssansregular font-semibold">
+                <span class="font-bold">NOTE:</span> <br />
                 The average outflow of scholarship will be 10%.
               </p>
             </span>
-            <span>
-              <h2>AIT MBA Specialized Programs Slabs:</h2>
+            <span class="relative w-[50%] px-[30px]">
+              <h2 class="text-white text-[24px] leading-[24px] semibold">
+                AIT MBA Specialized Programs Slabs:
+              </h2>
 
               <ul>
                 <li class="text-white py-[10px] leading-[20px] worksansregular">
@@ -1162,7 +1276,7 @@
         </div>
       </section>
 
-      <div class="h-[2000px]"></div>
+      <div class="h-[100px]"></div>
     </div>
     <script src="./script.js"></script>
   </body>
