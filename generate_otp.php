@@ -1,3 +1,71 @@
+<?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+$mail = new PHPMailer(true);
+
+session_start();
+function generateOtp() {
+    // Generate a random number between 100000 and 999999
+    $otp = random_int(100000, 999999);
+    return $otp;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    // Check if 'name' and 'email' keys exist in $_POST array
+    $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $_SESSION['otp'] = generateOtp();
+    $otp = $_SESSION['otp'];
+
+} else {
+    // If the form wasn't submitted, redirect to the form page
+    // header("Loation: ./index.html");  
+    echo "<h1 style='text-align: center;'>Error in OTP generation Please Provide correct mail Id</h1> <div> <a href='./index.html'>Click Here</a>To Go Home Page</div>";
+    exit();
+}
+
+try { 
+    //Server settings
+    $mail->SMTPDebug = false; //Enable verbose debug output (use-2)
+    $mail->isSMTP(); //Send using SMTP
+    $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+    $mail->SMTPAuth = true; //Enable SMTP authentication
+ 
+    $mail->Username = 'shubh.lingayat2003@gmail.com';
+    $mail->Password = 'wxuy mbnl asnv qctp'; 
+    $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
+    $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom("shubh.lingayat2003@gmail.com", "GladOwl");
+    $mail->addAddress($email, $fullname); //Name is optional
+    // $mail->AddAddress('test@gmail.com', 'person-name');
+ 
+    //Content
+    $mail->isHTML(true); //Set email format to HTML
+    $mail->Subject = 'Email Verification Mail From GladOwl';
+    $mail->Body = "Hello $fullname, Your One Time Password is: $otp. Do not share with anyone"; 
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    // header("Location: ./index.html");
+    // echo 'Message has been sent';
+    // echo '<script> alert("Success");</script>';
+    
+    // window.location.href="./index.html";
+} catch (Exception $e) {
+    echo "<h1 style='text-align: center;'>Message could not be sent. Mailer Error: {$mail->ErrorInfo} </h1><div> <a href='./index.html'>Click Here</a>To Go Home Page</div>";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -639,6 +707,7 @@
                 <input
                   name="fullname"
                   type="text"
+                  value='<?php echo "$fullname"; ?>'
                   placeholder="ENTER STUDENT NAME"
                   class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
                 />
@@ -650,6 +719,7 @@
                     name="email"
                     type="email"
                     id="email"
+                    value='<?php echo "$email"; ?>'
                     placeholder="ENTER STUDENT EMAIL ID"
                     class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
                   />
@@ -691,13 +761,12 @@
                 </div>
                 <span
                   action="./verify_otp.php"
-                  class="w-full relative flex items-center content-center gap-2 pl-[80px] pr-0"
+                  class="w-full flex items-center content-center gap-2 pl-[80px] pr-0"
                   id="verifyOTPForm"
                 >
                   <input
                     type="text"
-                    name="otp"
-                    id="enterotp"
+                    name="otp" 
                     placeholder="ENTER OTP"
                     class="w-[35%] h-10 pl-[15px] text-[14px] tracking-widest worksansregular rounded-md text-black border-[1px] border-textgrey"
                   />
@@ -708,18 +777,6 @@
                   >
                     Confirm OTP
                   </button>
-                  <img
-                    src="./images/green-tick.png"
-                    alt="Verified OTP"
-                    id="verifiedotp"
-                    class="absolute h-[11.85px] w-[14px] left-[175px] hidden"
-                  />
-                  <img
-                    src="./images/cross-tick.png"
-                    alt="Verified OTP"
-                    id="notverifiedotp"
-                    class="absolute h-[11.85px] w-[14px] left-[175px] hidden"
-                  />
                 </span>
                 <input
                   type="text"
@@ -1616,3 +1673,4 @@
     <script src="./script.js"></script>
   </body>
 </html>
+

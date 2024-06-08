@@ -1,3 +1,38 @@
+<?php
+session_start();
+
+// Check if form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if 'otp' key exists in $_POST array
+    $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    if (isset($_POST['otp'])) {
+        $submittedOtp = $_POST['otp'];
+        
+        // Retrieve the stored OTP from the session
+        $storedOtp = isset($_SESSION['otp']) ? $_SESSION['otp'] : null;
+
+        // Verify the OTP
+        if ($storedOtp && $submittedOtp == $storedOtp) {
+            // echo "OTP verified successfully!";
+            // Optionally, unset the OTP after successful verification
+            // unset($_SESSION['otp']);
+            echo "<script>document.getElementById('enterotp').disabled = true;</script>";
+            echo "<script>document.getElementById('verifiedotp').style.display = 'block';</script>";
+        } else {
+            echo "Invalid OTP. Please try again.";
+        }
+    } else {
+        echo "No OTP provided.";
+    }
+} else {
+    // If the form wasn't submitted, redirect to the form page
+    header("Location: ./index.html");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -639,6 +674,7 @@
                 <input
                   name="fullname"
                   type="text"
+                  value='<?php echo "$fullname"; ?>'
                   placeholder="ENTER STUDENT NAME"
                   class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
                 />
@@ -650,6 +686,7 @@
                     name="email"
                     type="email"
                     id="email"
+                    value='<?php echo "$email"; ?>'
                     placeholder="ENTER STUDENT EMAIL ID"
                     class="w-[64%] h-[48px] pr-[36px] pl-[15px] text-[15px] worksansregular rounded-md text-black border-[1px] border-textgrey"
                   />
@@ -691,13 +728,13 @@
                 </div>
                 <span
                   action="./verify_otp.php"
-                  class="w-full relative flex items-center content-center gap-2 pl-[80px] pr-0"
+                  class="w-full flex items-center content-center gap-2 pl-[80px] pr-0"
                   id="verifyOTPForm"
                 >
                   <input
                     type="text"
-                    name="otp"
-                    id="enterotp"
+                    name="otp" 
+                    value='<?php echo "$submittedOtp"; ?>'
                     placeholder="ENTER OTP"
                     class="w-[35%] h-10 pl-[15px] text-[14px] tracking-widest worksansregular rounded-md text-black border-[1px] border-textgrey"
                   />
@@ -708,18 +745,6 @@
                   >
                     Confirm OTP
                   </button>
-                  <img
-                    src="./images/green-tick.png"
-                    alt="Verified OTP"
-                    id="verifiedotp"
-                    class="absolute h-[11.85px] w-[14px] left-[175px] hidden"
-                  />
-                  <img
-                    src="./images/cross-tick.png"
-                    alt="Verified OTP"
-                    id="notverifiedotp"
-                    class="absolute h-[11.85px] w-[14px] left-[175px] hidden"
-                  />
                 </span>
                 <input
                   type="text"

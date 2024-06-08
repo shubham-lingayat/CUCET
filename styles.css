@@ -218,3 +218,25 @@
     opacity: 1;
   }
 }
+
+.cursor-grab1 {
+  cursor: default; /* Set cursor to default */
+  -webkit-user-select: none; /* Disable text selection */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; /* Disable tap highlight */
+  -webkit-touch-callout: none; /* Disable callout */
+  -webkit-scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
+}
+
+.overflow-x-scroll1 {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
