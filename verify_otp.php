@@ -17,8 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // echo "OTP verified successfully!";
             // Optionally, unset the OTP after successful verification
             // unset($_SESSION['otp']);
-            echo "<script>document.getElementById('enterotp').disabled = true;</script>";
-            echo "<script>document.getElementById('verifiedotp').style.display = 'block';</script>";
+            echo '<script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("enterotp").disabled = true;
+      });
+    </script>';
+            echo "<script type='text/JavaScript'>document.getElementById('verifiedotp').style.display = 'block';</script>";
         } else {
             echo "Invalid OTP. Please try again.";
         }
@@ -30,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ./index.html");
     exit();
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
